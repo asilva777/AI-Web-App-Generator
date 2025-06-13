@@ -1,56 +1,108 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    const industryNavLinks = document.querySelectorAll('.sidebar-nav a[data-industry]');
-    const dashboardContents = document.querySelectorAll('.dashboard-content');
+// ====== Sidebar Navigation and Dashboard Switching ======
+const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link[data-industry]');
+const dashboards = document.querySelectorAll('.dashboard-content');
+const mainContent = document.getElementById('main-content');
 
-    industryNavLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
+// Helper: Announce dashboard changes for screen readers
+function announceDashboardChange(message) {
+    let liveRegion = document.getElementById('dashboard-announcement');
+    if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.id = 'dashboard-announcement';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.className = 'visually-hidden';
+        document.body.appendChild(liveRegion);
+    }
+    liveRegion.textContent = message;
+}
 
-            const targetIndustry = this.getAttribute('data-industry');
+// Sidebar dashboard switching (mouse and keyboard)
+sidebarLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
 
-            // 1. Update active state in sidebar
-            industryNavLinks.forEach(navLink => navLink.classList.remove('active'));
-            this.classList.add('active');
-
-            // 2. Hide all dashboard content panels
-            dashboardContents.forEach(content => content.classList.add('hidden'));
-
-            // 3. Show the target dashboard
-            const targetDashboard = document.getElementById(`dashboard-${targetIndustry}`);
-            if (targetDashboard) {
-                targetDashboard.classList.remove('hidden');
-            }
-
-            // Optional: Update user profile/header based on industry
-            updateHeaderForIndustry(targetIndustry);
+        // Remove active state and aria-current from all links
+        sidebarLinks.forEach(l => {
+            l.classList.remove('active');
+            l.removeAttribute('aria-current');
         });
+
+        // Add active state and aria-current to current link
+        this.classList.add('active');
+        this.setAttribute('aria-current', 'page');
+
+        // Hide all dashboards
+        dashboards.forEach(dash => dash.classList.add('hidden'));
+
+        // Show the selected dashboard
+        const industry = this.getAttribute('data-industry');
+        const dashboard = document.getElementById('dashboard-' + industry);
+        if (dashboard) {
+            dashboard.classList.remove('hidden');
+            // Move focus to the dashboard heading for screen readers
+            const heading = dashboard.querySelector('.dashboard-title');
+            if (heading) heading.focus();
+            announceDashboardChange(heading ? heading.textContent : '');
+        }
     });
 
-    function updateHeaderForIndustry(industry) {
-        const userNameEl = document.querySelector('.user-name');
-        const searchBarInput = document.querySelector('.search-bar input');
-
-        switch(industry) {
-            case 'healthcare':
-                userNameEl.textContent = 'Dr. Emily Carter';
-                searchBarInput.placeholder = 'Search for patients, records, staff...';
-                break;
-            case 'retail':
-                userNameEl.textContent = 'Alex Johnson';
-                searchBarInput.placeholder = 'Search for products, orders, customers...';
-                break;
-            case 'finance':
-                userNameEl.textContent = 'Maria Garcia';
-                searchBarInput.placeholder = 'Search for transactions, clients, reports...';
-                break;
-            case 'logistics':
-                userNameEl.textContent = 'David Chen';
-                searchBarInput.placeholder = 'Search for shipments, drivers, routes...';
-                break;
-            default:
-                userNameEl.textContent = 'Admin User';
-                searchBarInput.placeholder = 'Search...';
+    // Accessibility: Keyboard navigation (Enter, Space)
+    link.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
         }
-    }
+    });
 });
+
+// ====== Skip Link Focus Support ======
+const skipLink = document.querySelector('.skip-link');
+if (skipLink && mainContent) {
+    skipLink.addEventListener('click', function(e) {
+        // Timeout ensures focus after browser jump
+        setTimeout(() => mainContent.focus(), 10);
+    });
+}
+
+// ====== Search Bar Demo (Ready for i18n) ======
+const searchForm = document.querySelector('.search-bar');
+if (searchForm) {
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Placeholder: Replace with real search logic or i18n
+        alert('Search not implemented in this demo.');
+    });
+}
+
+// ====== Focus Management for Dashboard Headings ======
+// Make dashboard headings focusable for accessibility
+document.querySelectorAll('.dashboard-title').forEach(title => {
+    title.setAttribute('tabindex', '-1');
+});
+
+// ====== Internationalization Readiness (Sample) ======
+// To localize, replace UI text via this function and update document.lang
+// function setLanguage(lang) {
+//     document.documentElement.lang = lang;
+//     // Replace UI text content here as needed for your language files
+//     // Example: document.querySelector('.logo-text').textContent = translations[lang].logo;
+// }
+
+// ====== Initial ARIA live region setup ======
+announceDashboardChange(document.querySelector('.dashboard-title')?.textContent || '');
+
+// ====== Optional: Persist Dashboard State Across Reloads ======
+// You can use localStorage to remember the last selected dashboard
+// Example (uncomment to enable):
+// window.addEventListener('DOMContentLoaded', () => {
+//     const lastIndustry = localStorage.getItem('activeIndustry');
+//     if (lastIndustry) {
+//         const link = document.querySelector(`.sidebar-nav .nav-link[data-industry="${lastIndustry}"]`);
+//         if (link) link.click();
+//     }
+// });
+// sidebarLinks.forEach(link => {
+//     link.addEventListener('click', function () {
+//         localStorage.setItem('activeIndustry', this.getAttribute('data-industry'));
+//     });
+// });
