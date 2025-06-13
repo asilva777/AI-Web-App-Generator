@@ -16,23 +16,22 @@ function announceDashboardChange(message) {
     liveRegion.textContent = message;
 }
 
-// Sidebar dashboard switching (mouse and keyboard)
-sidebarLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        // Remove active state and aria-current from all links
-        sidebarLinks.forEach(l => {
-            l.classList.remove('active');
-            l.removeAttribute('aria-current');
-        });
-
-        // Add active state and aria-current to current link
-        this.classList.add('active');
-        this.setAttribute('aria-current', 'page');
-
-        // Hide all dashboards
-        dashboards.forEach(dash => dash.classList.add('hidden'));
+// Dashboard switching logic
+document.querySelectorAll('.nav-link[data-industry]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = link.getAttribute('data-industry');
+    document.querySelectorAll('.dashboard-content').forEach(section => {
+      if (section.id === 'dashboard-' + target) {
+        section.classList.remove('hidden');
+        section.focus();
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+    setActiveNavLink();
+  });
+});
 
         // Show the selected dashboard
         const industry = this.getAttribute('data-industry');
@@ -46,38 +45,85 @@ sidebarLinks.forEach(link => {
         }
     });
 
-    // Accessibility: Keyboard navigation (Enter, Space)
-    link.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.click();
-        }
-    });
+// Accessibility: Dynamic aria-current for navigation/menu links
+function setActiveNavLink() {
+  const navLinks = document.querySelectorAll('.nav-link[data-industry]');
+  navLinks.forEach(link => {
+    link.setAttribute('aria-current', 'false');
+    link.classList.remove('active');
+  });
+  // Find the visible dashboard section
+  const dashboards = document.querySelectorAll('.dashboard-content');
+  dashboards.forEach((section, idx) => {
+    if (!section.classList.contains('hidden')) {
+      navLinks[idx].setAttribute('aria-current', 'page');
+      navLinks[idx].classList.add('active');
+    }
+  });
+}
+// Skip link focus fix for accessibility
+document.querySelector('.skip-link').addEventListener('click', function(e) {
+  const main = document.getElementById('main-content');
+  main.setAttribute('tabindex', '-1');
+  main.focus();
 });
 
-// ====== Skip Link Focus Support ======
-const skipLink = document.querySelector('.skip-link');
-if (skipLink && mainContent) {
-    skipLink.addEventListener('click', function(e) {
-        // Timeout ensures focus after browser jump
-        setTimeout(() => mainContent.focus(), 10);
-    });
+// Search input sanitization (basic XSS prevention)
+document.getElementById('main-search').addEventListener('input', function (e) {
+  this.value = this.value.replace(/[<>]/g, '');
+});
+
+// Dark mode toggle
+const darkModeBtn = document.getElementById('darkModeToggle');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+function setTheme(mode) {
+  if (mode === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    darkModeBtn.textContent = '☀️';
+    darkModeBtn.setAttribute('aria-label', 'Switch to light mode');
+    darkModeBtn.setAttribute('title', 'Switch to light mode');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+    darkModeBtn.textContent = '🌙';
+    darkModeBtn.setAttribute('aria-label', 'Switch to dark mode');
+    darkModeBtn.setAttribute('title', 'Switch to dark mode');
+  }
 }
 
-// ====== Search Bar Demo (Ready for i18n) ======
-const searchForm = document.querySelector('.search-bar');
-if (searchForm) {
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Placeholder: Replace with real search logic or i18n
-        alert('Search not implemented in this demo.');
-    });
-}
+(function () {
+  let theme = localStorage.getItem('theme');
+  if (!theme) {
+    theme = prefersDark ? 'dark' : 'light';
+  }
+  setTheme(theme);
+})();
+
+darkModeBtn.addEventListener('click', function () {
+  let currentTheme = document.documentElement.getAttribute('data-theme');
+  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});e: dark)').matches;
 
 // ====== Focus Management for Dashboard Headings ======
 // Make dashboard headings focusable for accessibility
 document.querySelectorAll('.dashboard-title').forEach(title => {
     title.setAttribute('tabindex', '-1');
+});
+
+// Keyboard navigation for dashboard cards
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this.click();
+    }
+  });
+});
+
+// Ensure ARIA and focus states are correct on load
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavLink();
 });
 
 // ====== Internationalization Readiness (Sample) ======
