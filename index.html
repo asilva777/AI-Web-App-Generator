@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniDash - Multi-Industry Business Platform</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-cubes-stacked logo-icon"></i>
+                <h1 class="logo-text">OmniDash</h1>
+            </div>
+
+            <nav class="sidebar-nav">
+                <h3>Industries</h3>
+                <ul>
+                    <li>
+                        <a href="#" class="nav-link active" data-industry="healthcare">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            <span>Healthcare</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-industry="retail">
+                            <i class="fa-solid fa-store"></i>
+                            <span>Retail & eCommerce</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-industry="finance">
+                            <i class="fa-solid fa-landmark"></i>
+                            <span>Finance & Banking</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-industry="logistics">
+                            <i class="fa-solid fa-truck-fast"></i>
+                            <span>Logistics</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <hr class="nav-divider">
+
+                <h3>Tools</h3>
+                 <ul>
+                    <li>
+                        <a href="#" class="nav-link">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="#" class="nav-link">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-wrapper">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search for patients, products, transactions...">
+                </div>
+                <div class="user-menu">
+                    <button class="icon-button"><i class="fa-regular fa-bell"></i></button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=admin" alt="User Avatar">
+                        <div class="user-info">
+                            <span class="user-name">Dr. Emily Carter</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Healthcare Dashboard -->
+                <div id="dashboard-healthcare" class="dashboard-content">
+                    <h2 class="dashboard-title">Healthcare Overview</h2>
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-hospital-user"></i> Patient Admissions</h3>
+                                <span class="card-stat">24 Today</span>
+                            </div>
+                            <div class="card-body">
+                                <p>New patient check-ins are up 15% this week.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-regular fa-calendar-check"></i> Appointments</h3>
+                                <span class="card-stat">128 Total</span>
+                            </div>
+                             <div class="card-body">
+                                <p>3 upcoming critical appointments.</p>
+                            </div>
+                        </div>
+                        <div class="card large-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-bar"></i> Hospital Capacity</h3>
+                            </div>
+                             <div class="card-body">
+                                <p>ICU: 85% | General Ward: 60% | ER: 95%</p>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-file-invoice-dollar"></i> Billing Queue</h3>
+                                <span class="card-stat">$1.2M</span>
+                            </div>
+                             <div class="card-body">
+                                <p>32 overdue invoices require attention.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Retail Dashboard -->
+                <div id="dashboard-retail" class="dashboard-content hidden">
+                    <h2 class="dashboard-title">Retail & eCommerce Overview</h2>
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-dollar-sign"></i> Today's Revenue</h3>
+                                <span class="card-stat">$42,550</span>
+                            </div>
+                            <div class="card-body">
+                                <p>Online sales contributing 65% of total.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-box-open"></i> Inventory Status</h3>
+                                <span class="card-stat">9,200 SKU</span>
+                            </div>
+                             <div class="card-body">
+                                <p>12 items are low in stock.</p>
+                            </div>
+                        </div>
+                        <div class="card large-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-pie"></i> Sales by Category</h3>
+                            </div>
+                             <div class="card-body">
+                                <p>Electronics: 40% | Apparel: 30% | Home: 20%</p>
+                                <img src="https://i.imgur.com/eBjwYfM.png" alt="Pie chart" class="chart-placeholder">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-users"></i> New Customers</h3>
+                                <span class="card-stat">102 Today</span>
+                            </div>
+                             <div class="card-body">
+                                <p>Mainly from recent social media campaign.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Finance Dashboard -->
+                <div id="dashboard-finance" class="dashboard-content hidden">
+                    <h2 class="dashboard-title">Finance & Banking Overview</h2>
+                     <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions</h3>
+                                <span class="card-stat">3,490 Today</span>
+                            </div>
+                            <div class="card-body">
+                                <p>Flagged 5 suspicious transactions for review.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-money-check-dollar"></i> Loan Applications</h3>
+                                <span class="card-stat">45 Pending</span>
+                            </div>
+                             <div class="card-body">
+                                <p>Approval rate holding steady at 78%.</p>
+                            </div>
+                        </div>
+                        <div class="card large-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-line"></i> Market Performance</h3>
+                            </div>
+                             <div class="card-body">
+                                <p>Portfolio Value: $15.3M (+1.2%)</p>
+                                <img src="https://i.imgur.com/qUygdOa.png" alt="Line chart" class="chart-placeholder">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-shield-halved"></i> Fraud Alerts</h3>
+                                <span class="card-stat">3 Critical</span>
+                            </div>
+                             <div class="card-body">
+                                <p>Immediate action required by security team.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics Dashboard -->
+                <div id="dashboard-logistics" class="dashboard-content hidden">
+                     <h2 class="dashboard-title">Logistics & Supply Chain Overview</h2>
+                     <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-boxes-packing"></i> Shipments</h3>
+                                <span class="card-stat">820 Out</span>
+                            </div>
+                            <div class="card-body">
+                                <p>On-time delivery rate is 98.5%.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-warehouse"></i> Warehouse Capacity</h3>
+                                <span class="card-stat">78% Full</span>
+                            </div>
+                             <div class="card-body">
+                                <p>Central hub nearing capacity. Plan diversions.</p>
+                            </div>
+                        </div>
+                        <div class="card large-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-map-location-dot"></i> Fleet Tracking</h3>
+                            </div>
+                             <div class="card-body">
+                                <p>45/50 trucks are on active routes.</p>
+                                <img src="https://i.imgur.com/t34Z4N4.png" alt="Map" class="chart-placeholder">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-gas-pump"></i> Fuel Costs</h3>
+                                <span class="card-stat">$0.15/mile</span>
+                            </div>
+                             <div class="card-body">
+                                <p>Costs are down 5% from last month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
