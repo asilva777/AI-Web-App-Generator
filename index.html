@@ -1,3 +1,8 @@
+Certainly! Here’s an improved version of your `index.html` file that incorporates all my suggestions for accessibility, SEO, performance, code quality, usability, and security.  
+This version assumes you will separately optimize `style.css` and `script.js` (e.g. minification, further accessibility, and performance tweaks).  
+**You may need to further adjust the CSP meta tag if you use inline styles/scripts or external resources not whitelisted here.**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OmniDash - Multi-Industry Business Platform</title>
     <meta name="description" content="OmniDash - Unified business dashboard for multiple industries.">
+    <meta name="keywords" content="OmniDash, business platform, dashboard, analytics, healthcare, retail, finance, logistics, multi-industry">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="OmniDash Dashboard">
     <meta property="og:description" content="Unified business dashboard for multiple industries">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <link rel="icon" href="favicon.ico">
+    <!-- Content Security Policy (adjust as needed) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://i.pravatar.cc https://i.imgur.com;">
 
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,59 +45,55 @@
                 <i class="fa-solid fa-cubes-stacked logo-icon" aria-hidden="true"></i>
                 <h1 class="logo-text">OmniDash</h1>
             </div>
-
             <nav class="sidebar-nav" aria-label="Primary navigation">
                 <h2 class="visually-hidden">Industries and Tools Navigation</h2>
                 <h3 id="industries-heading">Industries</h3>
                 <ul aria-labelledby="industries-heading">
                     <li>
-                        <a href="#" class="nav-link active" data-industry="healthcare" aria-current="page">
-                            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                        <a href="#" class="nav-link active" data-industry="healthcare" aria-current="page" tabindex="0">
+                            <i class="fa-solid fa-heart-pulse" aria-hidden="true" title="Healthcare"></i>
                             <span>Healthcare</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link" data-industry="retail">
-                            <i class="fa-solid fa-store" aria-hidden="true"></i>
+                        <a href="#" class="nav-link" data-industry="retail" tabindex="0">
+                            <i class="fa-solid fa-store" aria-hidden="true" title="Retail & eCommerce"></i>
                             <span>Retail &amp; eCommerce</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link" data-industry="finance">
-                            <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                        <a href="#" class="nav-link" data-industry="finance" tabindex="0">
+                            <i class="fa-solid fa-landmark" aria-hidden="true" title="Finance & Banking"></i>
                             <span>Finance &amp; Banking</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link" data-industry="logistics">
-                            <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                        <a href="#" class="nav-link" data-industry="logistics" tabindex="0">
+                            <i class="fa-solid fa-truck-fast" aria-hidden="true" title="Logistics"></i>
                             <span>Logistics</span>
                         </a>
                     </li>
                 </ul>
-
                 <hr class="nav-divider" aria-hidden="true">
-
                 <h3 id="tools-heading">Tools</h3>
                 <ul aria-labelledby="tools-heading">
                     <li>
-                        <a href="#" class="nav-link">
-                            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                        <a href="#" class="nav-link" tabindex="0">
+                            <i class="fa-solid fa-chart-line" aria-hidden="true" title="Analytics"></i>
                             <span>Analytics</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
-                            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                        <a href="#" class="nav-link" tabindex="0">
+                            <i class="fa-solid fa-gear" aria-hidden="true" title="Settings"></i>
                             <span>Settings</span>
                         </a>
                     </li>
                 </ul>
             </nav>
-            
             <div class="sidebar-footer">
-                <a href="#" class="nav-link">
-                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                <a href="#" class="nav-link" tabindex="0">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true" title="Logout"></i>
                     <span>Logout</span>
                 </a>
             </div>
@@ -98,12 +103,12 @@
         <div class="main-wrapper">
             <header class="main-header" role="banner">
                 <form class="search-bar" role="search" aria-label="Dashboard search" autocomplete="off">
-                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true" title="Search"></i>
                     <label for="main-search" class="visually-hidden">Search</label>
-                    <input type="search" id="main-search" placeholder="Search for patients, products, transactions..." aria-label="Search for patients, products, transactions">
+                    <input type="search" id="main-search" placeholder="Search for patients, products, transactions..." aria-label="Search for patients, products, transactions" tabindex="0" />
                 </form>
                 <div class="user-menu">
-                    <button class="icon-button" aria-label="Notifications"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-button" aria-label="Notifications" title="Notifications"><i class="fa-regular fa-bell"></i></button>
                     <div class="user-profile">
                         <img src="https://i.pravatar.cc/40?u=admin" alt="Avatar for Dr. Emily Carter" loading="lazy">
                         <div class="user-info">
@@ -113,33 +118,32 @@
                     </div>
                 </div>
             </header>
-
             <main class="main-content" id="main-content" tabindex="-1">
                 <!-- Healthcare Dashboard -->
-                <section id="dashboard-healthcare" class="dashboard-content" aria-labelledby="dashboard-healthcare-title">
+                <section id="dashboard-healthcare" class="dashboard-content" aria-labelledby="dashboard-healthcare-title" tabindex="0">
                     <h2 class="dashboard-title" id="dashboard-healthcare-title">Healthcare Overview</h2>
                     <div class="dashboard-grid">
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Patient Admissions">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> Patient Admissions</h3>
+                                <h3><i class="fa-solid fa-hospital-user" aria-hidden="true" title="Patient Admissions"></i> Patient Admissions</h3>
                                 <span class="card-stat">24 Today</span>
                             </div>
                             <div class="card-body">
                                 <p>New patient check-ins are up 15% this week.</p>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Appointments">
                             <div class="card-header">
-                                <h3><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Appointments</h3>
+                                <h3><i class="fa-regular fa-calendar-check" aria-hidden="true" title="Appointments"></i> Appointments</h3>
                                 <span class="card-stat">128 Total</span>
                             </div>
                             <div class="card-body">
                                 <p>3 upcoming critical appointments.</p>
                             </div>
                         </div>
-                        <div class="card large-card">
+                        <div class="card large-card" tabindex="0" aria-label="Hospital Capacity">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Hospital Capacity</h3>
+                                <h3><i class="fa-solid fa-chart-bar" aria-hidden="true" title="Hospital Capacity"></i> Hospital Capacity</h3>
                             </div>
                             <div class="card-body">
                                 <p>ICU: 85% | General Ward: 60% | ER: 95%</p>
@@ -148,9 +152,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Billing Queue">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> Billing Queue</h3>
+                                <h3><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true" title="Billing Queue"></i> Billing Queue</h3>
                                 <span class="card-stat">$1.2M</span>
                             </div>
                             <div class="card-body">
@@ -159,41 +163,40 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Retail Dashboard -->
-                <section id="dashboard-retail" class="dashboard-content hidden" aria-labelledby="dashboard-retail-title">
+                <section id="dashboard-retail" class="dashboard-content hidden" aria-labelledby="dashboard-retail-title" tabindex="0">
                     <h2 class="dashboard-title" id="dashboard-retail-title">Retail &amp; eCommerce Overview</h2>
                     <div class="dashboard-grid">
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Today's Revenue">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-dollar-sign" aria-hidden="true"></i> Today's Revenue</h3>
+                                <h3><i class="fa-solid fa-dollar-sign" aria-hidden="true" title="Today's Revenue"></i> Today's Revenue</h3>
                                 <span class="card-stat">$42,550</span>
                             </div>
                             <div class="card-body">
                                 <p>Online sales contributing 65% of total.</p>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Inventory Status">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-box-open" aria-hidden="true"></i> Inventory Status</h3>
+                                <h3><i class="fa-solid fa-box-open" aria-hidden="true" title="Inventory Status"></i> Inventory Status</h3>
                                 <span class="card-stat">9,200 SKU</span>
                             </div>
                             <div class="card-body">
                                 <p>12 items are low in stock.</p>
                             </div>
                         </div>
-                        <div class="card large-card">
+                        <div class="card large-card" tabindex="0" aria-label="Sales by Category">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Sales by Category</h3>
+                                <h3><i class="fa-solid fa-chart-pie" aria-hidden="true" title="Sales by Category"></i> Sales by Category</h3>
                             </div>
                             <div class="card-body">
                                 <p>Electronics: 40% | Apparel: 30% | Home: 20%</p>
                                 <img src="https://i.imgur.com/eBjwYfM.png" alt="Pie chart showing sales by category" class="chart-placeholder" loading="lazy">
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="New Customers">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-users" aria-hidden="true"></i> New Customers</h3>
+                                <h3><i class="fa-solid fa-users" aria-hidden="true" title="New Customers"></i> New Customers</h3>
                                 <span class="card-stat">102 Today</span>
                             </div>
                             <div class="card-body">
@@ -202,41 +205,40 @@
                         </div>
                     </div>
                 </section>
-                
                 <!-- Finance Dashboard -->
-                <section id="dashboard-finance" class="dashboard-content hidden" aria-labelledby="dashboard-finance-title">
+                <section id="dashboard-finance" class="dashboard-content hidden" aria-labelledby="dashboard-finance-title" tabindex="0">
                     <h2 class="dashboard-title" id="dashboard-finance-title">Finance &amp; Banking Overview</h2>
                     <div class="dashboard-grid">
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Transactions">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i> Transactions</h3>
+                                <h3><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true" title="Transactions"></i> Transactions</h3>
                                 <span class="card-stat">3,490 Today</span>
                             </div>
                             <div class="card-body">
                                 <p>Flagged 5 suspicious transactions for review.</p>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Loan Applications">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-money-check-dollar" aria-hidden="true"></i> Loan Applications</h3>
+                                <h3><i class="fa-solid fa-money-check-dollar" aria-hidden="true" title="Loan Applications"></i> Loan Applications</h3>
                                 <span class="card-stat">45 Pending</span>
                             </div>
                             <div class="card-body">
                                 <p>Approval rate holding steady at 78%.</p>
                             </div>
                         </div>
-                        <div class="card large-card">
+                        <div class="card large-card" tabindex="0" aria-label="Market Performance">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Market Performance</h3>
+                                <h3><i class="fa-solid fa-chart-line" aria-hidden="true" title="Market Performance"></i> Market Performance</h3>
                             </div>
                             <div class="card-body">
                                 <p>Portfolio Value: $15.3M (+1.2%)</p>
                                 <img src="https://i.imgur.com/qUygdOa.png" alt="Line chart of market performance" class="chart-placeholder" loading="lazy">
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Fraud Alerts">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Fraud Alerts</h3>
+                                <h3><i class="fa-solid fa-shield-halved" aria-hidden="true" title="Fraud Alerts"></i> Fraud Alerts</h3>
                                 <span class="card-stat">3 Critical</span>
                             </div>
                             <div class="card-body">
@@ -245,41 +247,40 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Logistics Dashboard -->
-                <section id="dashboard-logistics" class="dashboard-content hidden" aria-labelledby="dashboard-logistics-title">
+                <section id="dashboard-logistics" class="dashboard-content hidden" aria-labelledby="dashboard-logistics-title" tabindex="0">
                     <h2 class="dashboard-title" id="dashboard-logistics-title">Logistics &amp; Supply Chain Overview</h2>
                     <div class="dashboard-grid">
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Shipments">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-boxes-packing" aria-hidden="true"></i> Shipments</h3>
+                                <h3><i class="fa-solid fa-boxes-packing" aria-hidden="true" title="Shipments"></i> Shipments</h3>
                                 <span class="card-stat">820 Out</span>
                             </div>
                             <div class="card-body">
                                 <p>On-time delivery rate is 98.5%.</p>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Warehouse Capacity">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-warehouse" aria-hidden="true"></i> Warehouse Capacity</h3>
+                                <h3><i class="fa-solid fa-warehouse" aria-hidden="true" title="Warehouse Capacity"></i> Warehouse Capacity</h3>
                                 <span class="card-stat">78% Full</span>
                             </div>
                             <div class="card-body">
                                 <p>Central hub nearing capacity. Plan diversions.</p>
                             </div>
                         </div>
-                        <div class="card large-card">
+                        <div class="card large-card" tabindex="0" aria-label="Fleet Tracking">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Fleet Tracking</h3>
+                                <h3><i class="fa-solid fa-map-location-dot" aria-hidden="true" title="Fleet Tracking"></i> Fleet Tracking</h3>
                             </div>
                             <div class="card-body">
                                 <p>45/50 trucks are on active routes.</p>
                                 <img src="https://i.imgur.com/t34Z4N4.png" alt="Map showing fleet tracking" class="chart-placeholder" loading="lazy">
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" tabindex="0" aria-label="Fuel Costs">
                             <div class="card-header">
-                                <h3><i class="fa-solid fa-gas-pump" aria-hidden="true"></i> Fuel Costs</h3>
+                                <h3><i class="fa-solid fa-gas-pump" aria-hidden="true" title="Fuel Costs"></i> Fuel Costs</h3>
                                 <span class="card-stat">$0.15/mile</span>
                             </div>
                             <div class="card-body">
@@ -289,6 +290,8 @@
                     </div>
                 </section>
             </main>
+            <!-- Dark mode toggle (optional enhancement) -->
+            <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
         </div>
     </div>
     <!-- Custom JavaScript -->
